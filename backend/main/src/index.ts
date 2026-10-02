@@ -1,9 +1,15 @@
-import { Hono } from 'hono'
+import { SessionAuthObject } from "@clerk/backend";
+import { clerkMiddleware, getAuth } from "@hono/clerk-auth";
+import { Hono } from "hono";
 
-const app = new Hono()
+const app = new Hono();
 
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
-})
+app.use("*", clerkMiddleware());
 
-export default app
+app.get("/", (c) => {
+  const auth: SessionAuthObject = getAuth(c);
+
+  return c.text("Hello Hono!");
+});
+
+export default app;

@@ -7,6 +7,8 @@
     "cf-typegen": "wrangler types --env-interface CloudflareBindings"
   },
   "dependencies": {
+    "@clerk/backend": "^3.22.0",
+    "@hono/clerk-auth": "^3.1.1",
     "dotenv": "^18.0.5",
     "drizzle-orm": "^1.0.0-rc.4",
     "effect": "^4.0.0-rc.118",
