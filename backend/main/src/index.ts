@@ -6,7 +6,7 @@ const app = new Hono();
 
 app.use("*", clerkMiddleware());
 
-app.get("/", (c) => {
+app.get("/", async (c) => {
   const auth: SessionAuthObject = getAuth(c);
 
   return c.text("Hello Hono!");

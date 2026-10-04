@@ -1,0 +1,3 @@
+type UserServiceInterface = {
+  readonly createUser;
+};
