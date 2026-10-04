@@ -1,12 +1,16 @@
-export enum userRole {
-  NORMAL = "regular",
-  ORGANIZER = "organizer",
-  ADMIN = "admin",
-}
+import { userRole } from "../model/user";
 
-export type UserCreateRequest = {
+export type CreateUserRequest = {
   id: string;
   firstName: string;
   lastName: string;
+  role: userRole;
+};
+
+export type UserResponse = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
   role: userRole;
 };
