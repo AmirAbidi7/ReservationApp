@@ -4,7 +4,7 @@ import { Context, Effect, Layer } from "effect";
 import { ClerkService, ClerkServiceLive } from "../config/clerkClient";
 import { Database, DatabaseLive, Db } from "../config/db";
 import { CreateUserRequest, UserResponse } from "../dto/UserDTO";
-import { InternalServerError, ItemExistsServerError, NotFoundError } from "../errors/ApiErrors";
+import { InternalServerError, ItemExistsError, NotFoundError } from "../errors/ApiErrors";
 import { getEmail } from "../helper/clerk";
 import { userRole, usersTable } from "../model/user";
 
@@ -12,7 +12,7 @@ type UserServiceInterface = {
   readonly createUser: (
     userId: string,
     user: CreateUserRequest,
-  ) => Effect.Effect<UserResponse, ItemExistsServerError | InternalServerError>;
+  ) => Effect.Effect<UserResponse, ItemExistsError | InternalServerError>;
   readonly deleteUser: (userId: string) => Effect.Effect<void, NotFoundError | InternalServerError>;
   readonly updateUser: (
     userId: string,
@@ -51,7 +51,7 @@ const createUser = (db: Db, clerk: ClerkClient) => (userId: string, user: Create
     });
 
     if (userExists) {
-      return yield* Effect.fail(new ItemExistsServerError());
+      return yield* Effect.fail(new ItemExistsError());
     }
 
     const [newUser] = yield* Effect.tryPromise({

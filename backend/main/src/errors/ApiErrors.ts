@@ -37,7 +37,7 @@ export class InternalServerError extends Data.TaggedError("InternalServerError")
   }
 }
 
-export class ItemExistsServerError extends Data.TaggedError("ItemExistsError")<{
+export class ItemExistsError extends Data.TaggedError("ItemExistsError")<{
   message?: string;
 }> {
   readonly code = StatusCodes.BAD_REQUEST;
